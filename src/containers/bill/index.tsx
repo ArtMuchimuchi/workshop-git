@@ -9,6 +9,7 @@ import {
   StyledWrapper,
   TitleNoMargin
 } from '@containers/bill/style'
+import { Text } from '@style/index'
 import { Col, Row, Table } from 'antd'
 import Input from 'antd/lib/input/Input'
 import { ColumnsType } from 'antd/lib/table'
@@ -38,9 +39,9 @@ const BillContainer = (): ReactElement => {
       key: 'price',
       width: 100,
       render: (value: Product) => {
-        return <Text>{value={.price * value.quantity}</Text>
+        return <Text>{value.price * value.quantity}</Text>
       }
-    },
+    }
   ]
 
   return (
@@ -80,22 +81,26 @@ const BillContainer = (): ReactElement => {
           </Row>
         </StyledSubHeaderDetail>
         {/* Content */}
-        <Table columns={columns} dataSource={dataProducts} pagination={false} 
-        summary={(data) =>{
-          const total = data.reduce((prev, curr) => prev + curr.price, 0)
-            return(
+        <Table
+          columns={columns}
+          dataSource={dataProducts}
+          pagination={false}
+          summary={(data) => {
+            const total = data.reduce((prev, curr) => prev + curr.price, 0)
+            return (
               <Table.Summary>
-              <Table.Summary.Row>
-                <Table.Summary.Cell index={0} colSpan={3} align={'right'}>
-                  จำนวนเงิน
-                </Table.Summary.Cell>
-                <Table.Summary.Cell index={1} align={'center'}>
-                  {total}
-                </Table.Summary.Cell>
-              </Table.Summary.Row>
+                <Table.Summary.Row>
+                  <Table.Summary.Cell index={0} colSpan={3} align={'right'}>
+                    จำนวนเงิน
+                  </Table.Summary.Cell>
+                  <Table.Summary.Cell index={1} align={'center'}>
+                    {total}
+                  </Table.Summary.Cell>
+                </Table.Summary.Row>
               </Table.Summary>
             )
-        }}/>
+          }}
+        />
       </StyledWrapper>
     </StyledLayout>
   )
